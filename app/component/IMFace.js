@@ -251,10 +251,10 @@ export default class copy extends Component {
                     <TouchableOpacity
                         onPress={this._send}
                         activeOpacity = {0.8}
-                        style = {{backgroundColor:Const.color_lan,paddingVertical:3,paddingHorizontal:8,borderRadius:4}}
+                        style = {{backgroundColor:Const.color_blue,paddingVertical:3,paddingHorizontal:8,borderRadius:4}}
                     >
                         <Text
-                            style={[{color:'white'},System_styles.font_changgui_15]}
+                            style={[System_styles.getChanggui(15)]}
                         >
                             发送
                         </Text>
