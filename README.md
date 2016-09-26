@@ -17,24 +17,19 @@ npm install
 ```
 RCTTextView.h/RCTTextView.m/RCTTextViewManager.m
 ```
-文件 替换
+文件替换下面目录中对应文件
 ```
 node_modules/react-native/Libraries/Text
 ```
-下对应文件
-或者 将文件中／＊－－－－－－ －－－－－－＊／部分手动合并到
-```
-node_modules/react-native/Libraries/Text
-```
-下对应文件中
+或者将根目录文件中／＊－－－－－－－－－－－－＊／包起的代码部分手动合并到上面下对应文件中
 
 ####四.运行效果
 #####整体效果
-![语音](./1.jpeg) 
-![文本](./2.jpeg) 
-![表情](./3.jpeg) 
-![展示](./4.jpeg) 
-![长按](./5.jpeg) 
+![语音](./1.PNG) 
+![文本](./2.PNG) 
+![表情](./3.PNG) 
+![展示](./4.PNG) 
+![长按](./5.PNG) 
 
 
 
