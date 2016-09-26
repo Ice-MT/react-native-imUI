@@ -150,7 +150,7 @@ export default class IMMenu extends Component {
                 </ScrollView>
                 <IMPagControll
                     index={this.state.index}
-                    count = {1}
+                    count = {2}
                 />
 
             </View>
