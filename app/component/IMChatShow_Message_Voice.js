@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
     TouchableNativeFeedback
 } from 'react-native';
+import IMCharShowBg from './IMCharShowBg'
 
 
 import Const from '../util/const'
@@ -34,8 +35,11 @@ export default class IMChatShow_Message_Text extends Component {
         super(props);
         this.state = {
             imageIndex:2,
-            animation:false
+            animation:false,
+            bgWidth:0,
+            bgHeight:0,
         };
+
     }
 
     componentDidMount() {
@@ -106,9 +110,15 @@ export default class IMChatShow_Message_Text extends Component {
         })
     }
 
+    _onLayout = (event)=>{
+        this.setState({
+            bgHeight: event.nativeEvent.layout.height,
+            bgWidth: event.nativeEvent.layout.width,
+        })
+    }
     render() {
         const {data}=this.props
-        const {imageIndex,animation}=this.state
+        const {imageIndex,animation,bgHeight,bgWidth}=this.state
         // let msgdata = JSON.parse(data.messageJson);
         let duration = data.duration
 
@@ -121,7 +131,7 @@ export default class IMChatShow_Message_Text extends Component {
             </Image>
         );
         let timeText = (
-            <Text style={[{color:Const.color_hei_32,marginLeft:4},System_styles.font_changgui_13,data.isMe&&{marginLeft:0,marginRight:4,color:'white'}]}>
+            <Text style={[{color:Const.color_hei_32,marginLeft:4,backgroundColor:'transparent'},System_styles.font_changgui_13,data.isMe&&{marginLeft:0,marginRight:4,color:'white'}]}>
                 {Math.round(duration) + '"秒'}
             </Text>
         );
@@ -130,11 +140,15 @@ export default class IMChatShow_Message_Text extends Component {
         let kk = ww * 29
         let ll =  (Const.screen_width - 32 -50-40-10- kk)/60.0
         let voiceLine = (
-            <View style={[{backgroundColor:Const.color_hei_12,padding:8,paddingTop:8,paddingBottom:8,borderRadius:4,flexDirection:'row',width:kk+duration*ll,alignItems:'center'}
-            ,data.isMe&&{backgroundColor:Const.color_blue,justifyContent:'flex-end'}]}
+            <View style={[{paddingLeft:14,paddingRight:8,paddingTop:8,paddingBottom:8,borderRadius:4,flexDirection:'row',width:kk+duration*ll,alignItems:'center'}
+            ,data.isMe&&{paddingLeft:8,paddingRight:14,justifyContent:'flex-end'}]}
                   ref={component => this._root = component}
-
             >
+                <IMCharShowBg
+                    width = {bgWidth}
+                    height = {bgHeight}
+                    isMe = {data.isMe}
+                />
                 {data.isMe ? timeText : voiceIcon}
                 {data.isMe ? voiceIcon : timeText}
             </View>
@@ -155,8 +169,11 @@ export default class IMChatShow_Message_Text extends Component {
             <TouchableOpacity
                 onPress={this._playVoice}
                 onLongPress = {this._onLongPress}
+                onLayout={this._onLayout}
 
             >
+
+
                 <View style={[{flexDirection:'row'},data.isMe&&{justifyContent:'flex-end'}]}>
                     {voiceLine}
 

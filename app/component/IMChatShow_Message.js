@@ -23,7 +23,6 @@ import IMChatShow_Message_Text from './IMChatShow_Message_Text'
 import IMChatShow_Message_Image from './IMChatShow_Message_Image'
 import IMChatShow_Message_Voice from './IMChatShow_Message_Voice'
 
-
 export default class IMChatShow_Message extends Component {
 
     static defaultProps = {
@@ -84,6 +83,7 @@ export default class IMChatShow_Message extends Component {
             case Const.messageText:{
                 return(
                     <IMChatShow_Message_Text
+                        
                         data = {data}
                         longPress = {(data,message)=>longPress(data,message)}
                         

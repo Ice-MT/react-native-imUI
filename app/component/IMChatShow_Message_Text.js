@@ -12,6 +12,7 @@ import {
 
 import Const from '../util/const'
 import System_styles from '../util/system_styles'
+import IMCharShowBg from './IMCharShowBg'
 
 
 export default class IMChatShow_Message_Text extends Component {
@@ -33,6 +34,8 @@ export default class IMChatShow_Message_Text extends Component {
     constructor(props){
         super(props);
         this.state = {
+            bgWidth:0,
+            bgHeight:0,
 
         };
 
@@ -51,27 +54,43 @@ export default class IMChatShow_Message_Text extends Component {
         })
     }
 
+    _onLayout = (event)=>{
+        this.setState({
+            bgHeight: event.nativeEvent.layout.height,
+            bgWidth: event.nativeEvent.layout.width,
+        })
+    }
+    
 /*
 * */
     render() {
         const {data}=this.props
-        
+        const {bgHeight,bgWidth}=this.state
+
         return (
 
         <TouchableWithoutFeedback
             onLongPress = {this._onLongPress}
+            onLayout={this._onLayout}
+
         >
             <View
-                style={[{justifyContent:'center',paddingHorizontal:5,paddingVertical:8,borderRadius:4,backgroundColor:Const.color_hei_240},data.text.length>19&&{flex:1}
-                ,data.isMe&&{backgroundColor:Const.color_blue,alignItems:'flex-end'}]}
+                style={[{justifyContent:'center',paddingLeft:15,paddingRight:5,paddingVertical:8,borderRadius:4},data.text.length>19&&{flex:1}
+                ,data.isMe&&{alignItems:'flex-end',paddingRight:15,paddingLeft:5}]}
                 ref={component => this._root = component}
 
             >
+                <IMCharShowBg
+                    width = {bgWidth}
+                    height = {bgHeight}
+                    isMe = {data.isMe}
+                />
                 <Text
-                    style={[System_styles.getChanggui(15,Const.color_hei_56),{textAlign:'left',},data.isMe&&{color:'white'}]}
+                    style={[System_styles.getChanggui(15,Const.color_hei_56),{textAlign:'left',backgroundColor:'transparent'},data.isMe&&{color:'white'}]}
                 >
                     {data.text}
                 </Text>
+
             </View>
         </TouchableWithoutFeedback>
 
