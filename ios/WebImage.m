@@ -14,10 +14,13 @@
 @property(strong,nonatomic)UIImageView *imv;
 @property(strong,nonatomic)UIImage *showIm;
 
+@property(strong,nonatomic)UILabel *label1;
 
 @end
 
 @implementation WebImage
+
+
 
 - (instancetype)init
 {
