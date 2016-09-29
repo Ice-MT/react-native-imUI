@@ -156,11 +156,10 @@ export default class copy extends Component {
         this.props.callback('send')
     }
 
-    _renderFace =(item)=>{
+    _renderFace =(item,i)=>{
         const {index ,frist} = this.state
         // if(item.page == )
 
-        let tt = 0
         if(frist){
             return (
                 <View
@@ -174,16 +173,15 @@ export default class copy extends Component {
         return(
             <View
                 style={{width:Const.screen_width-10,}}
-                key = {item.page}
+                key = {i}
                 {...this._panResponder.panHandlers}
                 ref={component => {if(item.page===0){this._root = component}}}
             >
-                {item.items.map((item1)=>{
-                    tt++
+                {item.items.map((item1,i)=>{
                     return(
                         <View
                             style={{flex:1,flexDirection:'row',paddingHorizontal:15}}
-                            key = {tt}
+                            key = {i}
                         >
                             {item1.map((face)=>{
                                 let com = face==='delete'?(
@@ -237,8 +235,8 @@ export default class copy extends Component {
                     onScroll = {this._onScroll}
 
                 >
-                    {faces.map((item)=>{
-                        return this._renderFace(item)
+                    {faces.map((item,i)=>{
+                        return this._renderFace(item,i)
                     })}
                 </ScrollView>
                 <IMPagControll

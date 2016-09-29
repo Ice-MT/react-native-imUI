@@ -81,28 +81,27 @@ export default class IMMenu extends Component {
 
     }
 
-    _renderFace =(item,key)=>{
+    _renderFace =(item,i)=>{
         const {index } = this.state
 
-        let tt = 0
         return(
             <View
                 style={{width:Const.screen_width-10,}}
-                key = {key}
+                key = {i}
             >
-                {item.map((item1)=>{
+                {item.map((item1,i)=>{
                     tt++
                     return(
                         <View
                             style={{flex:1,flexDirection:'row',paddingHorizontal:15}}
-                            key = {tt}
+                            key = {i}
                         >
-                            {item1.map((item)=>{
+                            {item1.map((item,i)=>{
                                 if(item.title === undefined){
                                     return(
                                         <View
                                             style={{flex:1}}
-                                            key = {item.itemId}
+                                            key = {i}
                                         />
                                     )
                                 }
@@ -131,7 +130,6 @@ export default class IMMenu extends Component {
 
 
     render() {
-        let i=0
         return (
             <View
                 style={{flex:1,paddingTop:5,borderTopColor:Const.color_hei_240,borderTopWidth:1}}
@@ -142,8 +140,7 @@ export default class IMMenu extends Component {
                     pagingEnabled = {true}
                     onScroll = {this._onScroll}
                 >
-                    {menu.map((item)=>{
-                        i++
+                    {menu.map((item,i)=>{
                         return this._renderFace(item,i)
                     })}
 
